@@ -36,3 +36,9 @@
     margin: 0 10px;
 }
 
+.movie_cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+

@@ -1,6 +1,7 @@
 import React from 'react'
 import './MovieList.css'
 import fire from '../../assets/fire.png'
+import MovieCard from './MovieCard/MovieCard'
 
 const MovieList = () => {
   return (
@@ -29,7 +30,7 @@ const MovieList = () => {
             </div>
         </header>
         <div className="movie_cards">
-            
+            <MovieCard />
         </div>
     </section>
   )
