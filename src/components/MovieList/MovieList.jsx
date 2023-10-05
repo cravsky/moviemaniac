@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './MovieList.css'
 import fire from '../../assets/fire.png'
 import MovieCard from './MovieCard/MovieCard'
+import FilterGroup from './FilterGroup/FilterGroup'
 
 const MovieList = () => {
 
@@ -43,12 +44,9 @@ const MovieList = () => {
                 </h2>
                 {/* fs - filter/ sorting */}
                 <div className="align_center movie_list_fs">
-                    <ul className="align_center movie_filter">
-                        <li className={minRating === 8 ? "movie_filter_item active" : "movie_filter_item"} onClick={() => handleFilter(8)}>8+ Star</li>
-                        <li className={minRating === 7 ? "movie_filter_item active" : "movie_filter_item"} onClick={() => handleFilter(7)}>7+ Star</li>
-                        <li className={minRating === 6 ? "movie_filter_item active" : "movie_filter_item"} onClick={() => handleFilter(6)}>6+ Star</li>
-                    </ul>
-
+                    <FilterGroup onRatingClick={handleFilter} 
+                    minRating={minRating} 
+                    ratings={[8,7,6]}/>
                     <select name="" id="" className="movie_sorting">
                         <option value="">SortBy</option>
                         <option value="">Date</option>
