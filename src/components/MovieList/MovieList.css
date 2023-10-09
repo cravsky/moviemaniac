@@ -6,7 +6,7 @@
 
 .movie_list_heading {
     font-size: 26px;
-    color: #ffe400;
+    color: var(--heading_color);
 }
 
 .movie_filter {
@@ -20,16 +20,16 @@
 }
 
 .movie_filter_item.active {
-   border-bottom: 1px solid #e6e6e6;
-   font-weight: 500;
+    border-bottom: 1px solid #e6e6e6;
+    font-weight: 500;
 }
 
 .movie_sorting {
     border: none;
     outline: none;
     border-radius: 5px;
-    font-size:16px;
-    font-weight: 500   ;
+    font-size: 16px;
+    font-weight: 500;
     font-family: inherit;
     height: 30px;
     padding: 0 5px;
@@ -41,4 +41,3 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-
