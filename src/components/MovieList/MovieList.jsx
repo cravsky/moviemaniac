@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import _ from 'lodash'
 
 import './MovieList.css'
@@ -16,8 +16,13 @@ const MovieList = () => {
         order: "asc"
     })
 
+    const isMounted = useRef(false);
+
     useEffect(() => {
-        fetchMovies()
+        if (!isMounted.current) { fetchMovies() }
+        return () => {
+            isMounted.current = true;
+        }
     }, [])
 
     useEffect(() => {
@@ -26,6 +31,7 @@ const MovieList = () => {
             setFilteredMovies(sortedMovies);
         }
     }, [sort])
+
 
     const fetchMovies = async () => {
         const response = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=436697ac69a44f784040aed43fce1642&language=en-US&page=1')
