@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import _ from 'lodash'
+
 import './MovieList.css'
 import fire from '../../assets/fire.png'
 import MovieCard from './MovieCard/MovieCard'
@@ -17,6 +19,13 @@ const MovieList = () => {
     useEffect(() => {
         fetchMovies()
     }, [])
+
+    useEffect(() => {
+        if (sort.by !== "default") {
+            const sortedMovies = _.orderBy(filteredMovies, [sort.by], [sort.order])
+            setFilteredMovies(sortedMovies);
+        }
+    }, [sort])
 
     const fetchMovies = async () => {
         const response = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=436697ac69a44f784040aed43fce1642&language=en-US&page=1')
@@ -44,7 +53,6 @@ const MovieList = () => {
         })
 
     }
-    console.log(sort);
 
     return (
         <section className="movie_list">
