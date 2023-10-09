@@ -2,11 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import _ from 'lodash'
 
 import './MovieList.css'
-import fire from '../../assets/fire.png'
 import MovieCard from './MovieCard/MovieCard'
 import FilterGroup from './FilterGroup/FilterGroup'
 
-const MovieList = () => {
+const MovieList = ({ movieType, title, emoji }) => {
 
     const [movies, setMovies] = useState([])
     const [minRating, setMinRating] = useState(0)
@@ -19,7 +18,7 @@ const MovieList = () => {
     const isMounted = useRef(false);
 
     useEffect(() => {
-        if (!isMounted.current) { fetchMovies() }
+        if (!isMounted.current) { fetchMovies(movieType) }
         return () => {
             isMounted.current = true;
         }
@@ -33,10 +32,9 @@ const MovieList = () => {
     }, [sort])
 
 
-    const fetchMovies = async () => {
-        const response = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=436697ac69a44f784040aed43fce1642&language=en-US&page=1')
+    const fetchMovies = async (movieType) => {
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${movieType}?api_key=436697ac69a44f784040aed43fce1642&language=en-US&page=1`)
         const data = await response.json();
-        console.log(data.results);
         setMovies(data.results);
         setFilteredMovies(data.results);
     }
@@ -61,10 +59,10 @@ const MovieList = () => {
     }
 
     return (
-        <section className="movie_list">
+        <section className="movie_list" id={movieType}>
             <header className="align_center movie_list_header">
-                <h2 className="align_center movie_list_heading">Popular
-                    <img src={fire} alt="fire" className='navbar_emoji'></img>
+                <h2 className="align_center movie_list_heading">{title}
+                    <img src={emoji} alt={`${emoji} icon`} className='navbar_emoji'></img>
                 </h2>
                 {/* fs - filter/ sorting */}
                 <div className="align_center movie_list_fs">
