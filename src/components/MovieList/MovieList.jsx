@@ -33,7 +33,12 @@ const MovieList = ({ movieType, title, emoji }) => {
 
 
     const fetchMovies = async (movieType) => {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/${movieType}?api_key=436697ac69a44f784040aed43fce1642&language=en-US&page=1`)
+        // Production Environment
+        const response = await fetch(`https://api-proxy.up.railway.app/moviemaniac?movieType=${movieType}`);
+
+        // Local Environment
+        // const response = await fetch(`http://localhost:5000/moviemaniac?movieType=${movieType}`);
+
         const data = await response.json();
         setMovies(data.results);
         setFilteredMovies(data.results);
